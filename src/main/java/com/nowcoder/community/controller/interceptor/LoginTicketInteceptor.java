@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
- * TODO
+ * 拦截器，获取cookie登录凭证ticket， 并查询对应User注入model
  *
  * @author wuzexin
  * @created 2022/4/19 14:51
