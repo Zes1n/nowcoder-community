@@ -40,7 +40,7 @@
             email = #{email}
     </select>
 
-<!--     keyProperty 主键-->
+    <!-- keyProperty 可以在数据insert成功之后，自动将生成的id返回给user-->
     <insert id="insertUser" parameterType="com.nowcoder.community.entity.User" keyProperty="id">
         insert into user
             (<include refid="insertField"></include>)
