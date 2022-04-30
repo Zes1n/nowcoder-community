@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.*;
  * @created 2022/4/19 07:36
  */
 @Mapper
+@Deprecated  //不推荐使用
 public interface LoginTicketMapper {
 
     // 注解里面会自动把逗号拼接起来
