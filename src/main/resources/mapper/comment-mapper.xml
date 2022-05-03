@@ -33,7 +33,7 @@
         limit #{offset}, #{limit}
     </select>
 
-    <select id="selectCountByEntity" resultType="java.lang.Integer">
+    <select id="selectCountByEntity" resultType="int">
         select
             count(id)
         from
