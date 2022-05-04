@@ -62,6 +62,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         AUTHORITY_ADMIN,
                         AUTHORITY_MODERATOR
                 )
+                .antMatchers( // 版主拥有置顶和加精的权限
+                        "/discuss/top",
+                        "/discuss/wonderful"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_MODERATOR
+                )
+                .antMatchers(   // 管理员拥有删帖的权限
+                        "/discuss/delete"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_ADMIN
+                )
                 .anyRequest().permitAll()
                 // 关闭csrf
                 .and().csrf().disable();
@@ -76,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                             // 如果返回"XMLHttpRequest"， 就是异步请求，需要给浏览器返回Json
                             response.setContentType("application/plain;charset=utf-8");
                             PrintWriter writer = response.getWriter();
-                            writer.write(CommunityUtil.getJSONString(403,"你还没有登录！"));
+                            writer.write(CommunityUtil.getJSONString(403, "你还没有登录！"));
                         } else {
                             // 如果不是异步请求，重定向到登录页面
                             response.sendRedirect(request.getContextPath() + "/login");
@@ -91,7 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                             // 如果返回"XMLHttpRequest"， 就是异步请求，需要给浏览器返回Json
                             response.setContentType("application/plain;charset=utf-8");
                             PrintWriter writer = response.getWriter();
-                            writer.write(CommunityUtil.getJSONString(403,"你没有访问此功能的权限！"));
+                            writer.write(CommunityUtil.getJSONString(403, "你没有访问此功能的权限！"));
                         } else {
                             // 如果不是异步请求，重定向到登录页面
                             response.sendRedirect(request.getContextPath() + "/denied");
